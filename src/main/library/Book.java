@@ -1,5 +1,7 @@
 package main.library;
 
+import java.util.Objects;
+
 public class Book {
     private final String isbn;
     private final String title;
@@ -22,7 +24,20 @@ public class Book {
 
     @Override
     public String toString() {
-        return String.format("[%s] \"%s\" by %s (%s)",
+        return String.format("[%s] '%s' by %s (%s)",
                 isbn, title, author, available ? "available" : "loaned out");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return Objects.equals(isbn, book.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isbn);
     }
 }
