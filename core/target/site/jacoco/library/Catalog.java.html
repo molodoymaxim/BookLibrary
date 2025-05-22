@@ -21,21 +21,21 @@ import java.util.stream.Collectors;
     }
 
     public List&lt;Book&gt; listAll() {
-<span class="nc" id="L24">        return new ArrayList&lt;&gt;(books.values());</span>
+<span class="fc" id="L24">        return new ArrayList&lt;&gt;(books.values());</span>
     }
 
     public List&lt;Book&gt; searchByTitle(String titlePart) {
-<span class="nc" id="L28">        String lower = titlePart.toLowerCase();</span>
-<span class="nc" id="L29">        return books.values().stream()</span>
-<span class="nc" id="L30">                .filter(b -&gt; b.getTitle().toLowerCase().contains(lower))</span>
-<span class="nc" id="L31">                .collect(Collectors.toList());</span>
+<span class="fc" id="L28">        String lower = titlePart.toLowerCase();</span>
+<span class="fc" id="L29">        return books.values().stream()</span>
+<span class="fc" id="L30">                .filter(b -&gt; b.getTitle().toLowerCase().contains(lower))</span>
+<span class="fc" id="L31">                .collect(Collectors.toList());</span>
     }
 
     public List&lt;Book&gt; searchByAuthor(String authorPart) {
-<span class="nc" id="L35">        String lower = authorPart.toLowerCase();</span>
-<span class="nc" id="L36">        return books.values().stream()</span>
-<span class="nc" id="L37">                .filter(b -&gt; b.getAuthor().toLowerCase().contains(lower))</span>
-<span class="nc" id="L38">                .collect(Collectors.toList());</span>
+<span class="fc" id="L35">        String lower = authorPart.toLowerCase();</span>
+<span class="fc" id="L36">        return books.values().stream()</span>
+<span class="fc" id="L37">                .filter(b -&gt; b.getAuthor().toLowerCase().contains(lower))</span>
+<span class="fc" id="L38">                .collect(Collectors.toList());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -30,10 +30,10 @@ public class Book {
 
     @Override
     public boolean equals(Object o) {
-<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if (this == o) return true;</span>
-<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (!(o instanceof Book)) return false;</span>
-<span class="nc" id="L35">        Book book = (Book) o;</span>
-<span class="nc" id="L36">        return Objects.equals(isbn, book.isbn);</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (this == o) return true;</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (!(o instanceof Book)) return false;</span>
+<span class="fc" id="L35">        Book book = (Book) o;</span>
+<span class="fc" id="L36">        return Objects.equals(isbn, book.isbn);</span>
     }
 
     @Override
