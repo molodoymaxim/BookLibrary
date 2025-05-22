@@ -3,13 +3,31 @@ package library;
 import java.util.*;
 
 public class Library {
-    private final Catalog catalog = new Catalog();
+    private final Catalog catalog;
     private final Map<String, Member> members = new HashMap<>();
     private final List<Loan> loans = new ArrayList<>();
     private final int defaultLoanDays = 14;
     private final long finePerDay = 1; // currency units
 
-    public Catalog getCatalog() { return catalog; }
+    /**
+     * Конструктор по умолчанию — создаёт новую библиотеку с новым каталогом.
+     */
+    public Library() {
+        this(new Catalog());
+    }
+
+    /**
+     * Конструктор для тестирования — позволяет подставить мок-каталог.
+     *
+     * @param catalog каталог книг
+     */
+    public Library(Catalog catalog) {
+        this.catalog = catalog;
+    }
+
+    public Catalog getCatalog() {
+        return catalog;
+    }
 
     public void registerMember(Member member) {
         members.put(member.getMemberId(), member);
@@ -59,8 +77,17 @@ public class Library {
 
     public List<Loan> getActiveLoans() {
         List<Loan> res = new ArrayList<>();
-        for (Loan l : loans) if (l.getReturnDate() == null) res.add(l);
+        for (Loan l : loans) {
+            if (l.getReturnDate() == null) {
+                res.add(l);
+            }
+        }
         return res;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans.clear();
+        this.loans.addAll(loans);
     }
 
     public List<Loan> listOverdueLoans() {

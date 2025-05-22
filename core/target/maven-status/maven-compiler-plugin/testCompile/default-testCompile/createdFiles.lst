@@ -1,5 +1,6 @@
 library\LibraryTest.class
 library\MemberTest.class
 library\BookTest.class
+library\LibraryWithMockitoTest.class
 library\LoanTest.class
 library\CatalogTest.class

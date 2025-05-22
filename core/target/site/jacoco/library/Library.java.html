@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Library.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">library</a> &gt; <span class="el_source">Library.java</span></div><h1>Library.java</h1><pre class="source lang-java linenums">package library;
+
+import java.util.*;
+
+public class Library {
+    private final Catalog catalog;
+<span class="fc" id="L7">    private final Map&lt;String, Member&gt; members = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L8">    private final List&lt;Loan&gt; loans = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L9">    private final int defaultLoanDays = 14;</span>
+<span class="fc" id="L10">    private final long finePerDay = 1; // currency units</span>
+
+    /**
+     * Конструктор по умолчанию — создаёт новую библиотеку с новым каталогом.
+     */
+    public Library() {
+<span class="fc" id="L16">        this(new Catalog());</span>
+<span class="fc" id="L17">    }</span>
+
+    /**
+     * Конструктор для тестирования — позволяет подставить мок-каталог.
+     *
+     * @param catalog каталог книг
+     */
+<span class="fc" id="L24">    public Library(Catalog catalog) {</span>
+<span class="fc" id="L25">        this.catalog = catalog;</span>
+<span class="fc" id="L26">    }</span>
+
+    public Catalog getCatalog() {
+<span class="nc" id="L29">        return catalog;</span>
+    }
+
+    public void registerMember(Member member) {
+<span class="fc" id="L33">        members.put(member.getMemberId(), member);</span>
+<span class="fc" id="L34">    }</span>
+
+    public boolean removeMember(String memberId) {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        return members.remove(memberId) != null;</span>
+    }
+
+    public void addBook(Book book) {
+<span class="fc" id="L41">        catalog.addBook(book);</span>
+<span class="fc" id="L42">    }</span>
+
+    public boolean borrowBook(String isbn, String memberId) {
+<span class="fc" id="L45">        Optional&lt;Book&gt; opt = catalog.findByIsbn(isbn);</span>
+<span class="fc" id="L46">        Member m = members.get(memberId);</span>
+<span class="fc bfc" id="L47" title="All 6 branches covered.">        if (opt.isPresent() &amp;&amp; m != null &amp;&amp; opt.get().isAvailable()) {</span>
+<span class="fc" id="L48">            loans.add(new Loan(opt.get(), m, defaultLoanDays));</span>
+<span class="fc" id="L49">            return true;</span>
+        }
+<span class="fc" id="L51">        return false;</span>
+    }
+
+    public boolean returnBook(String isbn, String memberId) {
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        for (Loan loan : loans) {</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if (loan.getBook().getIsbn().equals(isbn)</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">                    &amp;&amp; loan.getMember().getMemberId().equals(memberId)</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">                    &amp;&amp; loan.getReturnDate() == null) {</span>
+<span class="fc" id="L59">                loan.returnBook();</span>
+<span class="fc" id="L60">                return true;</span>
+            }
+<span class="fc" id="L62">        }</span>
+<span class="fc" id="L63">        return false;</span>
+    }
+
+    public List&lt;Book&gt; listAllBooks() {
+<span class="nc" id="L67">        return catalog.listAll();</span>
+    }
+
+    public List&lt;Book&gt; listAvailableBooks() {
+<span class="nc" id="L71">        return catalog.listAvailable();</span>
+    }
+
+    public List&lt;Member&gt; listMembers() {
+<span class="nc" id="L75">        return new ArrayList&lt;&gt;(members.values());</span>
+    }
+
+    public List&lt;Loan&gt; getActiveLoans() {
+<span class="fc" id="L79">        List&lt;Loan&gt; res = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for (Loan l : loans) {</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">            if (l.getReturnDate() == null) {</span>
+<span class="fc" id="L82">                res.add(l);</span>
+            }
+<span class="fc" id="L84">        }</span>
+<span class="fc" id="L85">        return res;</span>
+    }
+
+    public void setLoans(List&lt;Loan&gt; loans) {
+<span class="nc" id="L89">        this.loans.clear();</span>
+<span class="nc" id="L90">        this.loans.addAll(loans);</span>
+<span class="nc" id="L91">    }</span>
+
+    public List&lt;Loan&gt; listOverdueLoans() {
+<span class="fc" id="L94">        List&lt;Loan&gt; overdue = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        for (Loan l : loans) {</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">            if (l.isOverdue()) {</span>
+<span class="fc" id="L97">                overdue.add(l);</span>
+            }
+<span class="fc" id="L99">        }</span>
+<span class="fc" id="L100">        return overdue;</span>
+    }
+
+    public long calculateFine(String isbn, String memberId) {
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        for (Loan l : loans) {</span>
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">            if (l.getBook().getIsbn().equals(isbn)</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">                    &amp;&amp; l.getMember().getMemberId().equals(memberId)) {</span>
+<span class="fc" id="L107">                return l.calculateFine(finePerDay);</span>
+            }
+<span class="nc" id="L109">        }</span>
+<span class="fc" id="L110">        return 0;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

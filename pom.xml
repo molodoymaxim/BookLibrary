@@ -37,6 +37,7 @@
                 <artifactId>junit-jupiter</artifactId>
                 <version>${junit.jupiter.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>
