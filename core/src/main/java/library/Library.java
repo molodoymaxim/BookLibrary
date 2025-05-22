@@ -9,6 +9,8 @@ public class Library {
     private final int defaultLoanDays = 14;
     private final long finePerDay = 1; // currency units
 
+    public Catalog getCatalog() { return catalog; }
+
     public void registerMember(Member member) {
         members.put(member.getMemberId(), member);
     }
@@ -63,7 +65,11 @@ public class Library {
 
     public List<Loan> listOverdueLoans() {
         List<Loan> overdue = new ArrayList<>();
-        for (Loan l : loans) if (l.isOverdue() && l.getReturnDate() == null) overdue.add(l);
+        for (Loan l : loans) {
+            if (l.isOverdue()) {
+                overdue.add(l);
+            }
+        }
         return overdue;
     }
 

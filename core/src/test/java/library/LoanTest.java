@@ -1,11 +1,9 @@
-package test;
-
-import library.Loan;
-import library.Book;
-import library.Member;
+package library;
 
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LoanTest {

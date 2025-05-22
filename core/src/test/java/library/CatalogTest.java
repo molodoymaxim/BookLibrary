@@ -1,11 +1,10 @@
-package test;
-
-import library.Catalog;
-import library.Book;
+package library;
 
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
 import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CatalogTest {

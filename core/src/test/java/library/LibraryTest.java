@@ -1,13 +1,11 @@
-package test;
-
-import library.Library;
-import library.Book;
-import library.Member;
-import library.Loan;
+package library;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
@@ -58,5 +56,37 @@ class LibraryTest {
         lib.borrowBook("42", "M42");
         assertTrue(lib.returnBook("42", "M42"));
         assertFalse(lib.returnBook("42", "M42"));
+    }
+
+    @Test
+    void testOverdueLoans() {
+        lib.borrowBook("42", "M42");
+
+        // Получаем активный заем
+        Loan loan = lib.getActiveLoans().get(0);
+
+        // Имитируем возврат через 3 дня после срока
+        LocalDate dueDate = loan.getDueDate();
+        LocalDate returnDate = dueDate.plusDays(3);
+        loan.returnBookOn(returnDate);
+
+        List<Loan> overdue = lib.listOverdueLoans();
+        assertEquals(1, overdue.size(), "Expected 1 overdue loan");
+    }
+
+    @Test
+    void testFineCalculation() {
+        lib.borrowBook("42", "M42");
+
+        // Получаем активный заем
+        Loan loan = lib.getActiveLoans().get(0);
+
+        // Имитируем возврат через 3 дня после срока
+        LocalDate dueDate = loan.getDueDate();
+        LocalDate returnDate = dueDate.plusDays(3);
+        loan.returnBookOn(returnDate);
+
+        long fine = lib.calculateFine("42", "M42");
+        assertEquals(3, fine); // Ожидаем штраф за 3 дня просрочки
     }
 }

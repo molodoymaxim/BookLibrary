@@ -43,7 +43,10 @@ public class MainApp {
                 .forEach(System.out::println);
 
         logger.info("Borrowing book ISBN2 to member M1...");
-        lib.borrowBook("ISBN2", "M1");
+        boolean success = lib.borrowBook("ISBN2", "M1");
+        if (!success) {
+            logger.warn("Failed to borrow book ISBN2 for member M1.");
+        }
 
         // Artificial delay to get different dates
         Thread.sleep(2000);
@@ -51,6 +54,8 @@ public class MainApp {
         logger.info("Returning book ISBN2 from member M1:");
         if (lib.returnBook("ISBN2", "M1")) {
             logger.info("Book returned. Fine: {}", lib.calculateFine("ISBN2", "M1"));
+        } else {
+            logger.warn("Failed to return book ISBN2 from member M1.");
         }
 
         logger.info("Listing overdue loans:");
@@ -58,11 +63,34 @@ public class MainApp {
             logger.info("Overdue loan: {}", l);
         }
 
+        // Вывод активных (не вернувшихся) займов
+        logger.info("Listing active loans:");
+        for (Loan l : lib.getActiveLoans()) {
+            logger.info("Active loan: {}", l);
+        }
+
+        // Поиск книг по автору
+        logger.info("Searching for books by author 'Java':");
+        lib.getCatalog().searchByAuthor("Java").forEach(System.out::println);
+
+        // Вывод доступных книг
+        logger.info("Available books:");
+        lib.listAvailableBooks().forEach(System.out::println);
+
         logger.info("Listing all members:");
         lib.listMembers().forEach(System.out::println);
 
         logger.info("Listing all books:");
         lib.listAllBooks().forEach(System.out::println);
+
+        // Удаление участника
+        logger.info("Removing member M1...");
+        boolean removed = lib.removeMember("M1");
+        if (removed) {
+            logger.info("Member M1 has been successfully removed.");
+        } else {
+            logger.warn("Member M1 was not found.");
+        }
 
         logger.info("Application has finished.");
     }
