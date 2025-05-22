@@ -38,6 +38,13 @@ public class Loan {
         }
     }
 
+    void returnBookOn(LocalDate returnDate) {
+        if (this.returnDate == null) {
+            this.returnDate = returnDate;
+            book.setAvailable(true);
+        }
+    }
+
     public boolean isOverdue() {
         LocalDate check = (returnDate != null ? returnDate : LocalDate.now());
         return check.isAfter(dueDate);

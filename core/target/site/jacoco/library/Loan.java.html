@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Loan.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">library</a> &gt; <span class="el_source">Loan.java</span></div><h1>Loan.java</h1><pre class="source lang-java linenums">package library;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+public class Loan {
+    private final Book book;
+    private final Member member;
+    private final LocalDate loanDate;
+    private final LocalDate dueDate;
+    private LocalDate returnDate;
+
+    /** Конструктор с явным сроком займа (в днях) */
+<span class="fc" id="L14">    public Loan(Book book, Member member, int loanDays) {</span>
+<span class="fc" id="L15">        this.book = book;</span>
+<span class="fc" id="L16">        this.member = member;</span>
+<span class="fc" id="L17">        this.loanDate = LocalDate.now();</span>
+<span class="fc" id="L18">        this.dueDate = loanDate.plusDays(loanDays);</span>
+<span class="fc" id="L19">        this.returnDate = null;</span>
+<span class="fc" id="L20">        book.setAvailable(false);</span>
+<span class="fc" id="L21">    }</span>
+
+    /** Перегрузка: срок займа по умолчанию — 14 дней */
+    public Loan(Book book, Member member) {
+<span class="fc" id="L25">        this(book, member, 14);</span>
+<span class="fc" id="L26">    }</span>
+
+<span class="fc" id="L28">    public Book getBook() { return book; }</span>
+<span class="fc" id="L29">    public Member getMember() { return member; }</span>
+<span class="fc" id="L30">    public LocalDate getLoanDate() { return loanDate; }</span>
+<span class="fc" id="L31">    public LocalDate getDueDate() { return dueDate; }</span>
+<span class="fc" id="L32">    public LocalDate getReturnDate() { return returnDate; }</span>
+
+    public void returnBook() {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (returnDate == null) {</span>
+<span class="fc" id="L36">            this.returnDate = LocalDate.now();</span>
+<span class="fc" id="L37">            book.setAvailable(true);</span>
+        }
+<span class="fc" id="L39">    }</span>
+
+    void returnBookOn(LocalDate returnDate) {
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (this.returnDate == null) {</span>
+<span class="fc" id="L43">            this.returnDate = returnDate;</span>
+<span class="fc" id="L44">            book.setAvailable(true);</span>
+        }
+<span class="fc" id="L46">    }</span>
+
+    public boolean isOverdue() {
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        LocalDate check = (returnDate != null ? returnDate : LocalDate.now());</span>
+<span class="fc" id="L50">        return check.isAfter(dueDate);</span>
+    }
+
+    public long calculateFine(long perDay) {
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (!isOverdue()) return 0;</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        LocalDate end = (returnDate != null ? returnDate : LocalDate.now());</span>
+<span class="fc" id="L56">        long daysLate = ChronoUnit.DAYS.between(dueDate, end);</span>
+<span class="fc" id="L57">        return daysLate * perDay;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L62">        String base = String.format(</span>
+                &quot;%s loaned to %s on %s, due %s&quot;,
+<span class="fc" id="L64">                book.getTitle(), member.getName(), loanDate, dueDate</span>
+        );
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (returnDate != null) {</span>
+<span class="fc" id="L67">            base += String.format(&quot; (returned on %s)&quot;, returnDate);</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">            if (isOverdue()) {</span>
+<span class="nc" id="L69">                base += String.format(&quot;, fine=%d&quot;, calculateFine(1));</span>
+            }
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        } else if (isOverdue()) {</span>
+<span class="nc" id="L72">            base += String.format(&quot; (OVERDUE, fine so far=%d)&quot;, calculateFine(1));</span>
+        }
+<span class="fc" id="L74">        return base;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
