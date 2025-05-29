@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <!-- Проверяет что файл заканчиается новой строко CRLF (Windows style) -->
+    <module name="NewlineAtEndOfFile">
+        <property name="lineSeparator" value="crlf"/>
+    </module>
+
+    <!-- Проверяет отсутствие табов в коде -->
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+
+    <!-- Проверяет кодировку UTF-8 -->
+    <module name="RegexpSingleline">
+        <property name="format" value="^\uFEFF"/>
+        <property name="message" value="Файл не должен содержать BOM-маркер UTF-8"/>
+    </module>
+</module>

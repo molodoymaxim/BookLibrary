@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="library.LibraryWithMockitoTest" time="1.915" tests="9" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="library.LibraryWithMockitoTest" time="1.726" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="24"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="RU"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
-    <property name="sun.java.command" value="C:\Users\Lenovo\AppData\Local\Temp\surefire3953059016103699714\surefirebooter-20250529123300812_3.jar C:\Users\Lenovo\AppData\Local\Temp\surefire3953059016103699714 2025-05-29T12-33-00_641-jvmRun1 surefire-20250529123300812_1tmp surefire_0-20250529123300812_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Lenovo\AppData\Local\Temp\surefire11413958396951311940\surefirebooter-20250529124432770_3.jar C:\Users\Lenovo\AppData\Local\Temp\surefire11413958396951311940 2025-05-29T12-44-32_591-jvmRun1 surefire-20250529124432770_1tmp surefire_0-20250529124432770_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="D:\Practice\book-lib\core\target\test-classes;D:\Practice\book-lib\core\target\classes;C:\Users\Lenovo\.m2\repository\org\apache\logging\log4j\log4j-core\2.17.1\log4j-core-2.17.1.jar;C:\Users\Lenovo\.m2\repository\org\apache\logging\log4j\log4j-api\2.17.1\log4j-api-2.17.1.jar;C:\Users\Lenovo\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.2\junit-jupiter-5.9.2.jar;C:\Users\Lenovo\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.2\junit-jupiter-api-5.9.2.jar;C:\Users\Lenovo\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Lenovo\.m2\repository\org\junit\platform\junit-platform-commons\1.9.2\junit-platform-commons-1.9.2.jar;C:\Users\Lenovo\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Lenovo\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.2\junit-jupiter-params-5.9.2.jar;C:\Users\Lenovo\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.2\junit-jupiter-engine-5.9.2.jar;C:\Users\Lenovo\.m2\repository\org\junit\platform\junit-platform-engine\1.9.2\junit-platform-engine-1.9.2.jar;C:\Users\Lenovo\.m2\repository\org\mockito\mockito-core\5.14.2\mockito-core-5.14.2.jar;C:\Users\Lenovo\.m2\repository\net\bytebuddy\byte-buddy\1.15.4\byte-buddy-1.15.4.jar;C:\Users\Lenovo\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.4\byte-buddy-agent-1.15.4.jar;C:\Users\Lenovo\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\Lenovo\.m2\repository\org\mockito\mockito-junit-jupiter\5.14.2\mockito-junit-jupiter-5.14.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Lenovo\AppData\Local\Temp\surefire3953059016103699714\surefirebooter-20250529123300812_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Lenovo\AppData\Local\Temp\surefire11413958396951311940\surefirebooter-20250529124432770_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="24.0.1+9-30"/>
@@ -58,7 +58,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="68.0"/>
   </properties>
-  <testcase name="testBorrowBook_Successful" classname="library.LibraryWithMockitoTest" time="1.834">
+  <testcase name="testBorrowBook_Successful" classname="library.LibraryWithMockitoTest" time="1.655">
     <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
 java.lang.instrument.IllegalClassFormatException: Error while instrumenting com/sun/tools/attach/VirtualMachine with JaCoCo 0.8.11.202310140853/f33756c.
 	at org.jacoco.agent.rt.internal_4742761.CoverageTransformer.transform(CoverageTransformer.java:94)
@@ -171,12 +171,12 @@ WARNING: If a serviceability tool is not in use, please run with -Djdk.instrumen
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
 ]]></system-err>
   </testcase>
-  <testcase name="testCalculateFine_NoMatchingLoan" classname="library.LibraryWithMockitoTest" time="0.011"/>
-  <testcase name="testBorrowBook_MemberNotFound" classname="library.LibraryWithMockitoTest" time="0.008"/>
-  <testcase name="testReturnBook_LoanNotFound" classname="library.LibraryWithMockitoTest" time="0.005"/>
-  <testcase name="testCalculateFine_NotOverdue" classname="library.LibraryWithMockitoTest" time="0.007"/>
-  <testcase name="testReturnBook_Successful" classname="library.LibraryWithMockitoTest" time="0.006"/>
-  <testcase name="testBorrowBook_BookNotFound" classname="library.LibraryWithMockitoTest" time="0.008"/>
+  <testcase name="testCalculateFine_NoMatchingLoan" classname="library.LibraryWithMockitoTest" time="0.008"/>
+  <testcase name="testBorrowBook_MemberNotFound" classname="library.LibraryWithMockitoTest" time="0.006"/>
+  <testcase name="testReturnBook_LoanNotFound" classname="library.LibraryWithMockitoTest" time="0.004"/>
+  <testcase name="testCalculateFine_NotOverdue" classname="library.LibraryWithMockitoTest" time="0.006"/>
+  <testcase name="testReturnBook_Successful" classname="library.LibraryWithMockitoTest" time="0.008"/>
+  <testcase name="testBorrowBook_BookNotFound" classname="library.LibraryWithMockitoTest" time="0.006"/>
   <testcase name="testCalculateFine_OverdueLoan" classname="library.LibraryWithMockitoTest" time="0.006"/>
-  <testcase name="testBorrowBook_BookNotAvailable" classname="library.LibraryWithMockitoTest" time="0.004"/>
+  <testcase name="testBorrowBook_BookNotAvailable" classname="library.LibraryWithMockitoTest" time="0.003"/>
 </testsuite>
