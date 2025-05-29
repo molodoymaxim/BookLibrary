@@ -39,7 +39,7 @@ pipeline {
 
         stage('Static Analysis') {
             when {
-                expression { env.BRANCH_NAME == "dev" }
+                expression { env.BRANCH_NAME == "develop" }
             }
             steps {
                 bat 'mvn checkstyle:check'
